@@ -36,7 +36,7 @@ class QuotesBloc extends Bloc<QuotesEvent, QuotesState> {
                   currentPage: currentState.currentPage + 1);
         }
       } catch (e) {
-        yield QuotesError(message: e.toString());
+        yield QuotesError(message: "An error occured");
       }
     }
   }
