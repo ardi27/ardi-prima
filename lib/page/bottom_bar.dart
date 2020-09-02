@@ -1,6 +1,8 @@
+import 'package:ardi_prima/bloc/quotes_bloc.dart';
 import 'package:ardi_prima/page/english_page.dart';
 import 'package:ardi_prima/page/suriname_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomBar extends StatefulWidget {
   BottomBar({Key key}) : super(key: key);
@@ -12,13 +14,18 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-
   static List _tabPages = <Widget>[EnglishPage(), SurinamePage()];
   static const _tab = <Tab>[
     Tab(
-      text: "English",
+      child: Text(
+        "English",
+        style: TextStyle(color: Colors.black, fontSize: 16),
+      ),
     ),
-    Tab(text: "Suriname"),
+    Tab(
+      child:
+          Text("Suriname", style: TextStyle(color: Colors.black, fontSize: 16)),
+    ),
   ];
   @override
   void initState() {
@@ -37,6 +44,7 @@ class _BottomBarState extends State<BottomBar>
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<QuotesBloc>(context)..add(FetchQuotes());
     return Scaffold(
       appBar: null,
       body: TabBarView(
@@ -44,9 +52,12 @@ class _BottomBarState extends State<BottomBar>
         controller: _tabController,
       ),
       bottomNavigationBar: Material(
-        color: Colors.blue,
+        color: Colors.white,
         child: TabBar(
           tabs: _tab,
+          indicatorColor: Colors.green[700],
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicatorWeight: 5,
           controller: _tabController,
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:ardi_prima/bloc/quotes_bloc.dart';
 import 'package:ardi_prima/obs.dart';
 import 'package:ardi_prima/page/bottom_bar.dart';
 import 'package:ardi_prima/page/english_page.dart';
+import 'package:ardi_prima/page/splash_page.dart';
 import 'package:ardi_prima/repository/quotes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: "Ardi Prima",
-        home: BottomBar(),
+        theme: ThemeData(fontFamily: 'Roboto Condensed'),
+        home: SplashPage(),
         debugShowCheckedModeBanner: false,
       ),
     );
