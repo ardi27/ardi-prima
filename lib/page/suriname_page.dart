@@ -84,7 +84,23 @@ class _SurinamePageState extends State<SurinamePage> {
                       : state.quotes.length + 1,
                 );
               } else if (state is QuotesError) {
-                return buildErrorUi(state.message, _quotesBloc);
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                        color: Colors.green[700],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: Text(
+                          "Retry",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          _quotesBloc.add(FetchQuotes());
+                        }),
+                  ),
+                );
               }
               return buildLoading();
             },
@@ -223,24 +239,4 @@ Widget quotesWidget(Quotes quotes) {
           ],
         ),
       ));
-}
-
-Widget buildErrorUi(String message, QuotesBloc quotesBloc) {
-  return Center(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: RaisedButton(
-          color: Colors.green[700],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          child: Text(
-            "Retry",
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            quotesBloc.add(FetchQuotes());
-          }),
-    ),
-  );
 }

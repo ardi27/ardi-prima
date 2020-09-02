@@ -34,6 +34,11 @@ class QuotesBloc extends Bloc<QuotesEvent, QuotesState> {
                   quotes: currentState.quotes + quotes,
                   hasReachedMax: false,
                   currentPage: currentState.currentPage + 1);
+        } else if (currentState is QuotesError) {
+          List<Quotes> quotes = await quotesRepository.fetchQuotes(1);
+          yield QuotesLoaded(
+              quotes: quotes, hasReachedMax: false, currentPage: 1);
+          return;
         }
       } catch (e) {
         yield QuotesError(message: "An error occured");
